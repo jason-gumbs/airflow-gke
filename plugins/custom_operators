@@ -1,0 +1,4 @@
+gcloud artifacts repositories create airflow-gke \
+ - repository-format=docker \
+ - location=us-east4 \
+ - description="Docker repository for custom Airflow images"
