@@ -55,7 +55,7 @@ airflowVersion: "2.3.0"
 images:
   airflow:
     repository: us-east1-docker.pkg.dev/sandbox-io-289003/airflow-gke/airflow-plugins-dependencies
-    tag: 4.0.0
+    tag: 5.0.0
     pullPolicy: IfNotPresent
   # To avoid images with user code, you can turn this to 'true' and
   # all the 'run-airflow-migrations' and 'wait-for-airflow-migrations' containers/jobs
@@ -227,7 +227,7 @@ rbac:
 
 # Airflow executor
 # One of: LocalExecutor, LocalKubernetesExecutor, CeleryExecutor, KubernetesExecutor, CeleryKubernetesExecutor
-executor: "LocalExecutor"
+executor: "KubernetesExecutor"
 
 # If this is true and using LocalExecutor/KubernetesExecutor/CeleryKubernetesExecutor, the scheduler's
 # service account will have access to communicate with the api-server and launch pods.

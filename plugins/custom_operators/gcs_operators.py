@@ -2,6 +2,10 @@ import os
 import json
 import tempfile
 
+# importing csv module
+import csv
+  
+
 from airflow.utils.decorators import apply_defaults
 from airflow.models.baseoperator import BaseOperator
 from airflow.providers.google.cloud.hooks.gcs import GCSHook
@@ -43,6 +47,40 @@ class ExampleDataToGCSOperator(BaseOperator):
                 json.dump(example_data, handle)
 
             gcs_hook = GCSHook(self.gcp_conn_id)
+            gcs_hook.download(
+               bucket_name=self.gcs_bucket,
+               object_name="test.csv",
+               filename="test.csv",
+            )
+
+            fields = []
+            rows = []
+            
+            # reading csv file
+            with open('test.csv', 'r') as csvfile:
+                # creating a csv reader object
+                csvreader = csv.reader(csvfile)
+                
+                # extracting field names through first row
+                fields = next(csvreader)
+            
+                # extracting each data row one by one
+                for row in csvreader:
+                    rows.append(row)
+            
+                # get total number of rows
+                print("Total no. of rows: %d"%(csvreader.line_num))
+            
+            # printing the field names
+            print('Field names are:' + ', '.join(field for field in fields))
+            
+            # printing first 5 rows
+            print('\nFirst 5 rows are:\n')
+            for row in rows[:5]:
+                # parsing each column of a row
+                for col in row:
+                    print("%10s"%col,end=" "),
+                print('\n')
             gcs_hook.upload(
                bucket_name=self.gcs_bucket,
                object_name=gcs_file_path,
