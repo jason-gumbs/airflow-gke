@@ -1,4 +1,4 @@
-FROM apache/airflow:2.2.1
+FROM apache/airflow:2.3.0
 
 WORKDIR ${AIRFLOW_HOME}
 

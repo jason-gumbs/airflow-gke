@@ -55,13 +55,13 @@ airflowVersion: "2.3.0"
 images:
   airflow:
     repository: us-east1-docker.pkg.dev/sandbox-io-289003/airflow-gke/airflow-plugins-dependencies
-    tag: 3.0.0
+    tag: 4.0.0
     pullPolicy: IfNotPresent
   # To avoid images with user code, you can turn this to 'true' and
   # all the 'run-airflow-migrations' and 'wait-for-airflow-migrations' containers/jobs
   # will use the images from 'defaultAirflowRepository:defaultAirflowTag' values
   # to run and wait for DB migrations .
-  useDefaultImageForMigration: false
+  useDefaultImageForMigration: true
   # timeout (in seconds) for airflow-migrations to complete
   migrationsWaitTimeout: 60
   pod_template:
