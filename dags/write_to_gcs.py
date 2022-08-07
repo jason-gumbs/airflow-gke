@@ -14,7 +14,7 @@ with DAG(
         task_id='create_example_data',
         run_date='{{ ds }}',
         gcp_conn_id='airflow_gke_gcs_conn_id',
-        gcs_bucket='example-data-bucket'
+        gcs_bucket='my-bucket-codit'
     )
 
     create_and_write_example_data
