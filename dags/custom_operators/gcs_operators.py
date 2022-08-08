@@ -106,8 +106,3 @@ class ExampleDataToGCSOperator(BaseOperator):
             
             # Custom
             
-            gcs_hook.upload(
-               bucket_name=self.gcs_bucket,
-               object_name=gcs_file_path,
-               filename=tmp_path,
-            )
