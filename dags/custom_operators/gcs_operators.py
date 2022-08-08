@@ -83,16 +83,21 @@ class ExampleDataToGCSOperator(BaseOperator):
                 print('\n')
             
             # Custom
-            
+            print(fields)
             for i in range(0, len(rows)):
                 rows[i][1] = rows[i][1].capitalize()
+                print(rows)
+            
+            
             
             with open('output.csv', 'w', newline='') as csvfile:
-                writer = csv.writer(csvfile, delimiter=' ',
+                writer = csv.writer(csvfile, delimiter=',',
                                         quotechar='|', quoting=csv.QUOTE_MINIMAL)
+                fields[1] = fields[1].capitalize()
                 writer.writerow(fields)
                 for row in rows:
                     writer.writerow(row)
+            
             gcs_hook.upload(
                bucket_name=self.gcs_bucket,
                object_name="output.csv",
